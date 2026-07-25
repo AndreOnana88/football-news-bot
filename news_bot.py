@@ -31,6 +31,7 @@ CLAUDE_MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
 LOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "posted_log.json")
 MAX_LOG_KEYS_IN_PROMPT = 500
 CAPTION_LIMIT = 900  # keep margin under Telegram's 1024 char caption cap
+MAX_TOKENS = 8192  # enough headroom for search reasoning + full JSON output
 
 client = Anthropic(api_key=ANTHROPIC_API_KEY)
 
@@ -93,21 +94,22 @@ Sport Bild, L'Equipe, Gazzetta, The Athletic), Telegram-канали новин.
 ФОРМАТ ПОСТУ (поле post_text), рядки розділені порожнім рядком:
 1. ЗАГОЛОВОК: "🗣" + суть новини одним яскравим реченням + " — [Ім'я джерела] \
 [емодзі прапора країни джерела]"
-2. ОСНОВНИЙ ТЕКСТ: 2-4 речення з контекстом і деталями. Емодзі-прапори клубу/\
-збірної/країни всюди, де вони згадуються.
+2. ОСНОВНИЙ ТЕКСТ: 2-3 короткі речення з контекстом і деталями. Емодзі-прапори \
+клубу/збірної/країни всюди, де вони згадуються.
 3. "📌 Джерело: [ім'я] ([медіа/статус]) — [рівень довіри: висока / середня / \
 потребує підтвердження]"
 4. ПИТАННЯ-ЗАКЛИК: провокаційне для трансферів/скандалів, нейтральне/\
 співчутливе для травм. Заверши закликом писати думки в коментарях + емодзі 👇.
 
-Без хештегів.
+Без хештегів. Пиши стисло і компактно — весь post_text не довше ~700 символів.
 
 ДЕДУП: тобі дадуть список dedup_key вже опублікованих новин. НЕ включай у \
 відповідь нічого, що за суттю збігається з уже опублікованим, навіть якщо \
 з'явились нові деталі — це вважається тією самою новиною.
 
-ВІДПОВІДЬ: поверни ТІЛЬКИ JSON-масив (без жодного тексту навколо, без markdown \
-пояснень), обгорнутий у ```json ... ```. Кожен елемент масиву:
+ВІДПОВІДЬ: як останнє повідомлення поверни ТІЛЬКИ JSON-масив (без жодного \
+тексту навколо, без пояснень), обгорнутий у ```json ... ```. Кожен елемент \
+масиву:
 {
   "dedup_key": "короткий унікальний slug латиницею, напр. transfer-mbappe-real",
   "post_text": "повністю готовий текст посту українською за форматом вище",
@@ -115,8 +117,9 @@ Sport Bild, L'Equipe, Gazzetta, The Athletic), Telegram-канали новин.
   "priority": 1
 }
 priority — ціле число, 1 = найважливіша новина циклу, більше число = менш \
-важлива. Максимум 8 новин за раз. Якщо нових новин немає — поверни порожній \
-масив [].
+важлива. МАКСИМУМ 4 новини за раз (обирай найважливіші, якщо кандидатів \
+більше) — це критично важливо, щоб відповідь повністю вміщалась. Якщо нових \
+новин немає — поверни порожній масив [].
 """
 
 
@@ -124,18 +127,25 @@ def find_news(existing_keys):
     keys_sample = existing_keys[-MAX_LOG_KEYS_IN_PROMPT:]
     user_prompt = (
         "Знайди свіжі футбольні новини за останні ~30 хвилин (з запасом на "
-        "пропущені цикли моніторингу).\n\n"
+        "пропущені цикли моніторингу). Максимум 4 новини у відповіді.\n\n"
         "Вже опубліковані dedup_key (не повторюй ці новини за суттю):\n"
         + (", ".join(keys_sample) if keys_sample else "(поки що порожньо)")
     )
 
     response = client.messages.create(
         model=CLAUDE_MODEL,
-        max_tokens=4096,
+        max_tokens=MAX_TOKENS,
         system=SYSTEM_PROMPT,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 8}],
         messages=[{"role": "user", "content": user_prompt}],
     )
+
+    if response.stop_reason == "max_tokens":
+        print(
+            "WARNING: response was truncated by max_tokens — consider raising "
+            "MAX_TOKENS or lowering the item cap further.",
+            file=sys.stderr,
+        )
 
     final_text = ""
     for block in response.content:
@@ -146,13 +156,16 @@ def find_news(existing_keys):
     if not match:
         match = re.search(r"(\[.*\])", final_text, re.DOTALL)
     if not match:
-        print("No JSON found in Claude's response:", final_text[:500], file=sys.stderr)
+        print("No JSON found in Claude's response (first 2000 chars):", file=sys.stderr)
+        print(final_text[:2000], file=sys.stderr)
         return []
 
     try:
         items = json.loads(match.group(1))
     except json.JSONDecodeError as e:
-        print("Failed to parse JSON:", e, file=sys.stderr)
+        print(f"Failed to parse JSON: {e}", file=sys.stderr)
+        print("Raw matched text (first 2000 chars):", file=sys.stderr)
+        print(match.group(1)[:2000], file=sys.stderr)
         return []
 
     items.sort(key=lambda x: x.get("priority", 99))
