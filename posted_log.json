@@ -58,5 +58,20 @@
     "dedup_key": "transfer-openda-lyon-loan",
     "source_url": "https://www.flashscore.com/news/transfer-news-live-tracker-updates/8QqUWm3n/",
     "date": "2026-07-25T20:15:37.529392+00:00"
+  },
+  {
+    "dedup_key": "transfer-diomande-realmadrid",
+    "source_url": "https://www.skysports.com/football/news/11820/13566796/yan-diomande-transfer-news-real-madrid-have-lb85m-bid-rejected-for-rb-leipzig-winger",
+    "date": "2026-07-25T23:48:10.958093+00:00"
+  },
+  {
+    "dedup_key": "transfer-castro-roma",
+    "source_url": "https://sports.yahoo.com/articles/bologna-accept-roma-offer-castro-204500454.html",
+    "date": "2026-07-25T23:48:14.597770+00:00"
+  },
+  {
+    "dedup_key": "transfer-dovbyk-bologna",
+    "source_url": "https://sports.yahoo.com/articles/bologna-interested-dovbyk-roma-finalize-205000847.html",
+    "date": "2026-07-25T23:48:17.390216+00:00"
   }
 ]
