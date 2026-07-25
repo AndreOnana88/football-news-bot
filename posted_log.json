@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "dedup_key": "coach-klopp-germany",
+    "source_url": "https://www.cnn.com/2026/07/24/sport/jurgen-klopp-germany-head-coach",
+    "date": "2026-07-25T10:48:07.368005+00:00"
+  },
+  {
+    "dedup_key": "injury-de-jong-barcelona",
+    "source_url": "https://football24.ua/news/barselona-povidomyla-nevtishni-novyny-shchodo-svoho-lidera-vybuv-na-5-6-misyatsiv-955299",
+    "date": "2026-07-25T10:48:11.435440+00:00"
+  },
+  {
+    "dedup_key": "transfer-trafford-leeds",
+    "source_url": "https://readmancity.com/2026/07/25/fabrizio-romano-confirms-leeds-united-move-manchester-city-goalkeeper/",
+    "date": "2026-07-25T10:48:16.103355+00:00"
+  },
+  {
+    "dedup_key": "transfer-guimaraes-arsenal",
+    "source_url": "https://www.football365.com/news/bruno-guimaraes-chelsea-arsenal-newcastle-united",
+    "date": "2026-07-25T10:48:18.949622+00:00"
+  }
+]
