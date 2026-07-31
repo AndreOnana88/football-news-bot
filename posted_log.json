@@ -243,5 +243,15 @@
     "dedup_key": "transfer-sangare-brentford",
     "source_url": "https://x.com/plettigoal",
     "date": "2026-07-31T07:42:39.139637+00:00"
+  },
+  {
+    "dedup_key": "transfer-espi-realmadrid-levante",
+    "source_url": "https://www.teamtalk.com/news/real-madrid-announce-21m-carlos-espi-signing-fabrizio-romano-leeds-brighton-links",
+    "date": "2026-07-31T18:49:43.635909+00:00"
+  },
+  {
+    "dedup_key": "transfer-souza-koln-wolfsburg-reject",
+    "source_url": "https://www.getfootballnewsgermany.com/2026/vinicius-souza-koln-reject/",
+    "date": "2026-07-31T18:49:46.326313+00:00"
   }
 ]
