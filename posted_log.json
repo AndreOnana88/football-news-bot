@@ -298,5 +298,25 @@
     "dedup_key": "transfer-kalero-karpaty",
     "source_url": "https://terrikon.com/uk/football/transfers/",
     "date": "2026-08-01T20:04:10.664123+00:00"
+  },
+  {
+    "dedup_key": "transfer-lewishall-manutd-newcastle",
+    "source_url": "https://www.football365.com/news/man-utd-romano-hall-transfer-approved-newcastle-chaos",
+    "date": "2026-08-01T23:44:23.846399+00:00"
+  },
+  {
+    "dedup_key": "transfer-hornicek-newcastle",
+    "source_url": "https://www.shieldsgazette.com/sport/football/newcastle-united/newcastle-united-news-lukas-horncek-8834124",
+    "date": "2026-08-01T23:44:27.161830+00:00"
+  },
+  {
+    "dedup_key": "transfer-antoniosilva-bournemouth",
+    "source_url": "https://www.footballtransfers.com/en/transfer-news/uk-premier-league/2026/08/fabrizio-romano-bruno-guimaraes-enzo-fernandez-mykhailo-mudryk",
+    "date": "2026-08-01T23:44:31.039445+00:00"
+  },
+  {
+    "dedup_key": "transfer-enzofernandez-chelsea-future",
+    "source_url": "https://www.football365.com/news/chelsea-enzo-fernandez-future-fabrizio-romano-update",
+    "date": "2026-08-01T23:44:33.791371+00:00"
   }
 ]
