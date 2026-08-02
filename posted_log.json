@@ -353,5 +353,20 @@
     "dedup_key": "transfer-rayanroberto-shakhtar",
     "source_url": "https://football-ukraine.com/footballtransfer.html",
     "date": "2026-08-02T15:49:00.913354+00:00"
+  },
+  {
+    "dedup_key": "transfer-barco-chelsea-official",
+    "source_url": "https://www.chelseafc.com/en/news/article/valentin-barco-signs-for-chelsea",
+    "date": "2026-08-02T20:16:46.558676+00:00"
+  },
+  {
+    "dedup_key": "transfer-suzuki-psg-bid",
+    "source_url": "https://football-italia.net/psg-move-ahead-of-juventus-with-suzuki-bid/",
+    "date": "2026-08-02T20:16:49.367721+00:00"
+  },
+  {
+    "dedup_key": "transfer-ferrantorres-psg-wants-leave",
+    "source_url": "https://www.forbes.com/sites/tomsanderson/2026/08/02/fc-barcelona-now-willing-to-let-ferran-torres-complete-psg-transfer/",
+    "date": "2026-08-02T20:16:52.251362+00:00"
   }
 ]
