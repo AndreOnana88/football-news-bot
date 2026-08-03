@@ -373,5 +373,15 @@
     "dedup_key": "transfer-hutsuliak-dynamo-yarmolenko",
     "source_url": "https://sport.ua/uk/transfers",
     "date": "2026-08-02T23:46:36.263199+00:00"
+  },
+  {
+    "dedup_key": "transfer-osimhen-tottenham-approach",
+    "source_url": "https://www.footballtransfers.com/en/transfer-news/uk-premier-league/2026/08/transfer-rumours-news-updates-gossip-victor-osimhen-tottenham-ezri-konsa-arsenal-3-august",
+    "date": "2026-08-03T12:39:57.651464+00:00"
+  },
+  {
+    "dedup_key": "transfer-grealish-atletico-madrid",
+    "source_url": "https://www.tntsports.co.uk/football/transfers/2026-2027/atletico-madrid-jack-grealish-tottenham-hotspur-victor-osimhen-hull-man-utd-bayindir_sto23324824/story.shtml",
+    "date": "2026-08-03T12:40:00.165975+00:00"
   }
 ]
